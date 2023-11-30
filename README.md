@@ -9,7 +9,6 @@ This application was developed as a final project for the "Software Project" cla
 ### Prerequisites
 
 - [Java](https://www.oracle.com/java/technologies/javase-downloads.html) installed
-- [Maven](https://maven.apache.org/download.cgi) installed
 
 ### Getting Started
 
@@ -35,9 +34,6 @@ This application was developed as a final project for the "Software Project" cla
 - The application will be running at [http://localhost:8080](http://localhost:8080).
 - The Swagger UI provides a user-friendly interface to explore and test the API endpoints.
 
-## Project Details
-
-- This project was developed as a final project for the class "Software Project" at the Universidade Federal de Campina Grande (UFCG).
 
 ## Notes
 
