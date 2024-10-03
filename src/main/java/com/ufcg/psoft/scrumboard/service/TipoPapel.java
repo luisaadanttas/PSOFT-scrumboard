@@ -12,35 +12,35 @@ public enum TipoPapel {
 
 	SCRUM_MASTER ("Scrum Master") {
 		@Override
-		PapelAbstract instanciaPapel(User user) {
+		public PapelAbstract instanciaPapel(User user) {
 			return new ScrumMaster(user);
 		}
 	},
 
 	PRODUCT_OWNER ("Product Owner") {
 		@Override
-		PapelAbstract instanciaPapel(User user) {
+		public PapelAbstract instanciaPapel(User user) {
 			return new ProductOwner(user);
 		}
 	},
 
 	PESQUISADOR ("Pesquisador") {
 		@Override
-		PapelAbstract instanciaPapel(User user) {
+		public PapelAbstract instanciaPapel(User user) {
 			return new Pesquisador(user);
 		}
 	},
 
 	DESENVOLVEDOR ("Desenvolvedor") {
 		@Override
-		PapelAbstract instanciaPapel(User user) {
+		public PapelAbstract instanciaPapel(User user) {
 			return new Desenvolvedor(user);
 		}
 	},
 
 	ESTAGIARIO ("Estagiário") {
 		@Override
-		PapelAbstract instanciaPapel(User user) {
+		public PapelAbstract instanciaPapel(User user) {
 			return new Estagiario(user);
 		}
 	};
@@ -55,6 +55,6 @@ public enum TipoPapel {
 		return this.nome;
 	}
 
-	abstract PapelAbstract instanciaPapel(User user);
+	public abstract PapelAbstract instanciaPapel(User user);
 
 }

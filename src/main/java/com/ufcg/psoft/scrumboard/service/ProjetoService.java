@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import com.ufcg.psoft.scrumboard.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +16,11 @@ import com.ufcg.psoft.scrumboard.dto.TipoPapelDTO;
 import com.ufcg.psoft.scrumboard.exception.NonexistentProjectException;
 import com.ufcg.psoft.scrumboard.exception.OperationException;
 import com.ufcg.psoft.scrumboard.exception.UserException;
+import com.ufcg.psoft.scrumboard.model.PapelAbstract;
+import com.ufcg.psoft.scrumboard.model.Projeto;
+import com.ufcg.psoft.scrumboard.model.Report;
+import com.ufcg.psoft.scrumboard.model.ScrumMaster;
+import com.ufcg.psoft.scrumboard.model.User;
 import com.ufcg.psoft.scrumboard.repository.ProjetoRepository;
 
 @Service
@@ -44,7 +48,7 @@ public class ProjetoService {
 		return projDto;
 	}
 
-	Projeto recuperaProjeto(int idProj) throws NonexistentProjectException {
+	public Projeto recuperaProjeto(int idProj) throws NonexistentProjectException {
 		Projeto proj = projetoRepo.get(idProj);
 		if (proj == null)
 			throw new NonexistentProjectException("projeto inexistente");
@@ -118,28 +122,6 @@ public class ProjetoService {
                                  TipoPapel.ESTAGIARIO.nome())
 				};
 		return papeisDisponiveis;
-	}
-
-	public void alocaUserEmProjeto(int idProj, String usernameAlocado, TipoPapel papel, String usernameScrumMaster) throws NonexistentProjectException, UserException, OperationException {
-		Projeto projeto = this.recuperaProjeto(idProj);
-		User alocado = userService.getUser(usernameAlocado);
-		if (!usernameScrumMaster.equals(projeto.getScrumMaster().getUsername()))
-			throw new OperationException(
-					"Permissão negada. O usuário que ordenou a alocação não é "
-					+ "o scrum master do projeto " + idProj + "."
-					);
-		if (papel == TipoPapel.SCRUM_MASTER)
-			throw new OperationException(
-					"Papel não disponível. Um projeto pode ter apenas um "
-					+ "scrum master, o qual não pode ser substituído"
-					);
-		if (projeto.temMembro(usernameAlocado))
-			throw new OperationException(
-					"O usuário " + usernameAlocado +
-					" já está alocado no projeto " + idProj + "."
-					);
-		PapelAbstract novoMembro = papel.instanciaPapel(alocado);
-		projeto.addMembro(novoMembro);
 	}
 
 	public List<Report> gerarRelatorio(Integer idProj, String username) throws NonexistentProjectException, OperationException, UserException {

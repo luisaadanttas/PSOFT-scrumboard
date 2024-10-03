@@ -4,13 +4,14 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import com.ufcg.psoft.scrumboard.dto.TaskCreatedDTO;
-import com.ufcg.psoft.scrumboard.exception.TaskNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.ufcg.psoft.scrumboard.dto.TaskCreatedDTO;
 import com.ufcg.psoft.scrumboard.dto.TaskDTO;
 import com.ufcg.psoft.scrumboard.exception.NonexistentProjectException;
 import com.ufcg.psoft.scrumboard.exception.OperationException;
+import com.ufcg.psoft.scrumboard.exception.TaskNotFoundException;
 import com.ufcg.psoft.scrumboard.exception.UserStoryNotFoundException;
 import com.ufcg.psoft.scrumboard.model.Projeto;
 import com.ufcg.psoft.scrumboard.model.Task;
@@ -57,8 +58,6 @@ public class TaskService {
 	public void removeTask(int projId, int usId, int taskId, String requesterUsername)
 			throws NonexistentProjectException, UserStoryNotFoundException, OperationException {
 		UserStory us = getUserStory(projId, usId, requesterUsername);
-		if (!us.canRemoveTasks())
-			throw new OperationException("não é permitido apagar tasks de user stories no estágio "+us.getStateName());
 		us.removeTask(taskId);
 	}
 

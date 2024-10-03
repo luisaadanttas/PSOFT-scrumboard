@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ufcg.psoft.scrumboard.model.PapelAbstract;
 import com.ufcg.psoft.scrumboard.dto.ProjetoAtualizacaoDTO;
 import com.ufcg.psoft.scrumboard.dto.ProjetoCriacaoDTO;
 import com.ufcg.psoft.scrumboard.dto.ProjetoDTO;
@@ -22,9 +23,13 @@ import com.ufcg.psoft.scrumboard.dto.TipoPapelDTO;
 import com.ufcg.psoft.scrumboard.exception.NonexistentProjectException;
 import com.ufcg.psoft.scrumboard.exception.OperationException;
 import com.ufcg.psoft.scrumboard.exception.UserException;
+import com.ufcg.psoft.scrumboard.model.PapelAbstract;
+import com.ufcg.psoft.scrumboard.model.Projeto;
 import com.ufcg.psoft.scrumboard.model.Report;
 import com.ufcg.psoft.scrumboard.service.ProjetoService;
 import com.ufcg.psoft.scrumboard.service.TipoPapel;
+import com.ufcg.psoft.scrumboard.service.UserService;
+import com.ufcg.psoft.scrumboard.model.User;
 
 @RestController
 @RequestMapping("/api")
@@ -34,6 +39,8 @@ public class ProjetoController {
 	@Autowired
 	private ProjetoService projetoService;
 
+	@Autowired
+	private UserService userService;
 	@RequestMapping(value = "/projeto/", method = RequestMethod.POST)
 	public ResponseEntity<?> cadastraProjeto(@RequestBody ProjetoCriacaoDTO projDto) {
 
@@ -102,7 +109,25 @@ public class ProjetoController {
 			@RequestParam("usr") String usernameAlocado, @RequestParam TipoPapel papel,
 			@RequestHeader String usernameScrumMaster) {
 		try {
-			projetoService.alocaUserEmProjeto(idProj, usernameAlocado, papel, usernameScrumMaster);
+			Projeto projeto = projetoService.recuperaProjeto(idProj);
+			User alocado = userService.getUser(usernameAlocado);
+			if (!usernameScrumMaster.equals(projeto.getScrumMaster().getUsername()))
+				throw new OperationException(
+						"Permissão negada. O usuário que ordenou a alocação não é "
+						+ "o scrum master do projeto " + idProj + "."
+						);
+			if (papel == TipoPapel.SCRUM_MASTER)
+				throw new OperationException(
+						"Papel não disponível. Um projeto pode ter apenas um "
+						+ "scrum master, o qual não pode ser substituído"
+						);
+			if (projeto.temMembro(usernameAlocado))
+				throw new OperationException(
+						"O usuário " + usernameAlocado +
+						" já está alocado no projeto " + idProj + "."
+						);
+			PapelAbstract novoMembro = papel.instanciaPapel(alocado);
+			projeto.addMembro(novoMembro);
 		} catch (NonexistentProjectException npe) {
 			return new ResponseEntity<String>("Projeto "+ idProj +" não encontrado.", HttpStatus.NOT_FOUND);
 		} catch (UserException ue) {

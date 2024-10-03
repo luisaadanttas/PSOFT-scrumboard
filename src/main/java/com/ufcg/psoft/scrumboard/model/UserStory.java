@@ -111,10 +111,6 @@ public class UserStory {
 		return this.title;
 	}
 
-	public boolean canRemoveTasks() {
-		return getStateName().equals("ToDo") || getStateName().equals("WorkInProgress");
-	}
-
     public void removeTask(int taskId) {
 		this.tasks.remove(taskId);
     }

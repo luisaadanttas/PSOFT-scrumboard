@@ -10,7 +10,7 @@ public abstract class PapelAbstract implements UserStoryListener {
 
 	private User user;
 
-	protected PapelAbstract(User user) {
+	public PapelAbstract(User user) {
 		this.user = user;
 	}
 
