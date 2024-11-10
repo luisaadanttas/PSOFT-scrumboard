@@ -25,6 +25,11 @@ This application was developed as a final project for the "Software Project" cla
     ./mvnw spring-boot:run
     ```
 
+    to test:
+    ```bash
+    mvn -Dtest=UserControllerTest test
+    ```
+
 3. Access the Swagger UI:
 
     Open your web browser and navigate to [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html) to interact with the API.
@@ -45,3 +50,4 @@ This application was developed as a final project for the "Software Project" cla
     git add .mvn/wrapper/*
     git commit -m "Update Maven Wrapper files"
     ```
+
