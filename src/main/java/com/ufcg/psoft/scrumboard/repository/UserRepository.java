@@ -10,7 +10,9 @@ public class UserRepository {
     private ArrayList<User> users;
 
     public UserRepository(){
+        User user1 = new User("user@gmail.com", "joao", "joao");
         this.users = new ArrayList<User>();
+        this.users.add(user1);
     }
 
     public String addUser(User user) {
