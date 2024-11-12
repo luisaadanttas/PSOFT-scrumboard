@@ -1,40 +1,54 @@
 package com.ufcg.psoft.scrumboard.repository;
+import java.util.ArrayList;
 
-import com.ufcg.psoft.scrumboard.model.User;
 import org.springframework.stereotype.Repository;
 
-import java.util.HashMap;
-import java.util.Map;
+import com.ufcg.psoft.scrumboard.model.User;
 
 @Repository
 public class UserRepository {
-    private Map<String, User> users;
+    private ArrayList<User> users;
 
     public UserRepository(){
-        this.users = new HashMap<String, User>();
+        User user1 = new User("user@gmail.com", "joao", "joao");
+        this.users = new ArrayList<User>();
+        this.users.add(user1);
     }
 
     public String addUser(User user) {
-        this.users.put(user.getUsername(), user);
+        users.add(user);
         return (user.getUsername());
     }
 
     public User getUser(String username){
-        return this.users.get(username);
+        for (User user : users){
+            if (user.getUsername().equals(username)){
+                return user;
+            }
+        }
+        return null;
     }
 
-    public void editUser(User user){
-        this.users.replace(user.getUsername(), user);
+    public void editUser(User newUser){
+        for (User user : users){
+            if (user.getUsername().equals(newUser.getUsername())){
+                user = newUser;
+            }
+        }
     }
 
-    public void deleteUser(String username){
-        this.users.remove(username);
+    public void deleteUser(String username) {
+        users.removeIf(user -> user.getUsername().equals(username));
     }
 
 
     public boolean jaExiste(String username){
-        return this.users.containsKey(username);
+        for (User user : users){
+            if (user.getUsername().equals(username)){
+                return true;
+            }
+        }
+        return false;
     }
-
 
 }
