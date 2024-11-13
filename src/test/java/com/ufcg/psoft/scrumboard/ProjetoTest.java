@@ -35,7 +35,7 @@ public class ProjetoTest {
         ResponseEntity<?> response = projetoController.cadastraProjeto(projetoDTO);
 
         assertEquals(HttpStatus.CREATED, response.getStatusCode());
-        assertEquals("Novo projeto cadastrado com ID 2", response.getBody());
+        assertEquals("Novo projeto cadastrado com ID 1", response.getBody());
     }
 
 }

@@ -115,8 +115,12 @@ public class UserStory {
 		return getStateName().equals("ToDo") || getStateName().equals("WorkInProgress");
 	}
 
-    public void removeTask(int taskId) {
-		this.tasks.remove(taskId);
+    public boolean removeTask(int taskId) {
+		boolean result = true;
+		if (this.tasks.get(taskId).isFinished()) {
+			this.tasks.remove(taskId);
+		}
+		return false;
     }
 
 	public Task getTask(int taskId) {

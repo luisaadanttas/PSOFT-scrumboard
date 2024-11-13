@@ -57,8 +57,9 @@ public class TaskService {
 	public void removeTask(int projId, int usId, int taskId, String requesterUsername)
 			throws NonexistentProjectException, UserStoryNotFoundException, OperationException {
 		UserStory us = getUserStory(projId, usId, requesterUsername);
-		if (!us.canRemoveTasks())
+		if (us.removeTask(1) == false){
 			throw new OperationException("não é permitido apagar tasks de user stories no estágio "+us.getStateName());
+		}
 		us.removeTask(taskId);
 	}
 

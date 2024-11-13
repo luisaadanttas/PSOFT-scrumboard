@@ -3,6 +3,8 @@ package com.ufcg.psoft.scrumboard.controller;
 import com.ufcg.psoft.scrumboard.dto.*;
 import com.ufcg.psoft.scrumboard.exception.*;
 import com.ufcg.psoft.scrumboard.service.*;
+import java.util.List;
+import com.ufcg.psoft.scrumboard.model.Task;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -45,21 +47,15 @@ public class TaskTest {
     }
 
     @Test
-    public void cadastrarTask_set_success() throws TaskNotFoundException,UserStoryNotFoundException,UserException, NonexistentProjectException, OperationException, InvalidUSRequestException {
+    public void removeTask_set_success() throws TaskNotFoundException, UserStoryNotFoundException, UserException, NonexistentProjectException, OperationException, InvalidUSRequestException {
 
         userService.addUser(userDTO);
         projetoService.cadastraProjeto(projetoDTO);
-        projetoService.alocaUserEmProjeto(1,"maria",TipoPapel.PESQUISADOR, "joao");
-
-        userStoryService.cadastraUS(userStoryDTO,"joao");
-        taskService.cadastraTask(1,1,taskDTO,"joao");
-        taskService.setTaskFinished(1,1,1,"joao");
-        
-        try {
-            System.out.println(projetoService.consultaProjeto(1));
-        } catch (NonexistentProjectException e) {
-            e.printStackTrace();
-        }
+        projetoService.alocaUserEmProjeto(1, "maria", TipoPapel.PESQUISADOR, "joao");
+        userStoryService.cadastraUS(userStoryDTO, "joao");
+        taskService.cadastraTask(1, 1, taskDTO, "joao");
+        taskService.removeTask(1, 1, 1, "joao");
     }
+
 
 }
