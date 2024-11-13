@@ -47,7 +47,7 @@ public class TaskTest {
     }
 
     @Test
-    public void removeTask_set_success() throws TaskNotFoundException, UserStoryNotFoundException, UserException, NonexistentProjectException, OperationException, InvalidUSRequestException {
+    public void removeTask_should_throw_exception() throws TaskNotFoundException, UserStoryNotFoundException, UserException, NonexistentProjectException, OperationException, InvalidUSRequestException {
 
         userService.addUser(userDTO);
         projetoService.cadastraProjeto(projetoDTO);
