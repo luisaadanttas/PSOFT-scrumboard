@@ -137,4 +137,26 @@ public class ProjetoService {
 		}
 	}
 
+	public void alocaUserEmProjeto(int idProj, String usernameAlocado, TipoPapel papel, String usernameScrumMaster) throws NonexistentProjectException, UserException, OperationException {
+		Projeto projeto = this.recuperaProjeto(idProj);
+		User alocado = userService.getUser(usernameAlocado);
+		if (!usernameScrumMaster.equals(projeto.getScrumMaster().getUsername()))
+			throw new OperationException(
+					"Permissão negada. O usuário que ordenou a alocação não é "
+					+ "o scrum master do projeto " + idProj + "."
+					);
+		if (papel == TipoPapel.SCRUM_MASTER)
+			throw new OperationException(
+					"Papel não disponível. Um projeto pode ter apenas um "
+					+ "scrum master, o qual não pode ser substituído"
+					);
+		if (projeto.temMembro(usernameAlocado))
+			throw new OperationException(
+					"O usuário " + usernameAlocado +
+					" já está alocado no projeto " + idProj + "."
+					);
+		PapelAbstract novoMembro = papel.instanciaPapel(alocado);
+		projeto.addMembro(novoMembro);
+	}
+
 }
