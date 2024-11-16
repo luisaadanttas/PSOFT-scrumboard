@@ -55,12 +55,12 @@ public class TaskService {
 	}
 
 	public void removeTask(int projId, int usId, int taskId, String requesterUsername)
-			throws NonexistentProjectException, UserStoryNotFoundException, OperationException {
+			throws NonexistentProjectException, UserStoryNotFoundException, OperationException, TaskNotFoundException {
 		UserStory us = getUserStory(projId, usId, requesterUsername);
-		if (us.removeTask(1) == false){
-			throw new OperationException("não é permitido apagar tasks de user stories no estágio "+us.getStateName());
+		if (!us.removeTask(taskId)){
+			throw new OperationException("não é permitido apagar task que nao esteja no estágio finished");
 		}
-		us.removeTask(taskId);
+
 	}
 
 	public TaskCreatedDTO consultaTask(int projId, int usId, int taskId, String requesterUsername)

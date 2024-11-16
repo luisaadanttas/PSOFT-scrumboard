@@ -76,7 +76,7 @@ public class TaskController {
 
 		try {
 			taskService.removeTask(projId, usId, taskId, requesterUsername);
-		} catch (NonexistentProjectException | UserStoryNotFoundException e) {
+		} catch (NonexistentProjectException | TaskNotFoundException | UserStoryNotFoundException e) {
 			return new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
 		} catch (OperationException e) {
 			return new ResponseEntity<String>(e.getMessage(), HttpStatus.FORBIDDEN);

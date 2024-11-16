@@ -47,13 +47,15 @@ public class TaskTest {
     }
 
     @Test
-    public void removeTask_set_success() throws TaskNotFoundException, UserStoryNotFoundException, UserException, NonexistentProjectException, OperationException, InvalidUSRequestException {
+    public void removeTask_set_success() throws InterruptedException,TaskNotFoundException, UserStoryNotFoundException, UserException, NonexistentProjectException, OperationException, InvalidUSRequestException {
 
         userService.addUser(userDTO);
         projetoService.cadastraProjeto(projetoDTO);
         projetoService.alocaUserEmProjeto(1, "maria", TipoPapel.PESQUISADOR, "joao");
         userStoryService.cadastraUS(userStoryDTO, "joao");
         taskService.cadastraTask(1, 1, taskDTO, "joao");
+        taskService.listaTasks(1,1, "joao");
+        taskService.setTaskFinished(1, 1, 1, "joao");
         taskService.removeTask(1, 1, 1, "joao");
     }
 
