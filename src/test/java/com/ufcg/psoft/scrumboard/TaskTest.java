@@ -47,7 +47,7 @@ public class TaskTest {
     }
 
     @Test
-    public void removeTask_set_success() throws InterruptedException,TaskNotFoundException, UserStoryNotFoundException, UserException, NonexistentProjectException, OperationException, InvalidUSRequestException {
+    public void removeTask_set_success() throws TaskNotFoundException, UserStoryNotFoundException, UserException, NonexistentProjectException, OperationException, InvalidUSRequestException {
 
         userService.addUser(userDTO);
         projetoService.cadastraProjeto(projetoDTO);
@@ -55,8 +55,12 @@ public class TaskTest {
         userStoryService.cadastraUS(userStoryDTO, "joao");
         taskService.cadastraTask(1, 1, taskDTO, "joao");
         taskService.listaTasks(1,1, "joao");
-        taskService.removeTask(1, 1, 1, "joao");
+
+        Exception exception = assertThrows(OperationException.class, () -> {
+            taskService.removeTask(1, 1, 1, "joao"); 
+        });
+
+        String expectedMessage = "não é permitido apagar task que não esteja no estágio finished";
+        assertEquals(expectedMessage, exception.getMessage());
     }
-
-
 }
