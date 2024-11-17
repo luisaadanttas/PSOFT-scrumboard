@@ -55,7 +55,6 @@ public class TaskTest {
         userStoryService.cadastraUS(userStoryDTO, "joao");
         taskService.cadastraTask(1, 1, taskDTO, "joao");
         taskService.listaTasks(1,1, "joao");
-        taskService.setTaskFinished(1, 1, 1, "joao");
         taskService.removeTask(1, 1, 1, "joao");
     }
 

@@ -116,11 +116,8 @@ public class UserStory {
 	}
 
     public boolean removeTask(int taskId) {
-		if (this.tasks.get(taskId).isFinished()) {
-			this.tasks.remove(taskId);
-			return true;
-		}
-		return false;
+		this.tasks.remove(taskId);
+		return true;
     }
 
 	public Task getTask(int taskId) {

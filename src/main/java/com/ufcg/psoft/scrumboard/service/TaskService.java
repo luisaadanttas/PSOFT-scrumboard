@@ -58,7 +58,7 @@ public class TaskService {
 			throws NonexistentProjectException, UserStoryNotFoundException, OperationException, TaskNotFoundException {
 		UserStory us = getUserStory(projId, usId, requesterUsername);
 		if (!us.removeTask(taskId)){
-			throw new OperationException("não é permitido apagar task que nao esteja no estágio finished");
+			throw new OperationException("não é permitido apagar task que não esteja no estágio finished");
 		}
 
 	}
