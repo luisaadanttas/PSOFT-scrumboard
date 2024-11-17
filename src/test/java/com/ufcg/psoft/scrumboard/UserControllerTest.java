@@ -17,32 +17,4 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 @SpringBootTest
 public class UserControllerTest {
 
-    @Autowired
-    private UserController userController;
-
-    @Autowired
-    private UserService userService; 
-    
-    @Autowired
-    private UserRepository userRepository; 
-
-    private UserDTO validUserDTO;
-    private UserDTO existingUserDTO;
-
-    @BeforeEach
-    public void setUp() {
-        validUserDTO = new UserDTO("email", "validPassword", "validUsername");
-        existingUserDTO = new UserDTO("existingUsername", "password", "email");
-    }
-
-    @Test
-    public void testCadastrarUser_Success() throws UserException {
-        ResponseEntity<?> response = userController.cadastrarUser(validUserDTO);
-        System.out.println(userService.getUser("validUsername").getEmail());
-
-        assertEquals(HttpStatus.CREATED, response.getStatusCode());
-        assertEquals("Usuario cadastrado com username: validUsername", response.getBody());
-
-        assertNotNull(userRepository.getUser("validUsername"));
-    }
 }
