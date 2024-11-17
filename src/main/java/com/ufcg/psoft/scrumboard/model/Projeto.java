@@ -29,7 +29,6 @@ public class Projeto {
 		this.nome = nome;
 		this.descricao = descricao;
 		this.instituicaoParceira = instituicaoParceira;
-		this.membros = new HashMap<>();
 		this.addMembro(scrumMaster);
 		this.lastUSId = 0;
 		this.userStories = new HashMap<>();
