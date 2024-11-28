@@ -1,4 +1,4 @@
-package com.ufcg.psoft.scrumboard.controller;
+package com.ufcg.psoft.scrumboard;
 
 import com.ufcg.psoft.scrumboard.dto.UserDTO;
 import com.ufcg.psoft.scrumboard.exception.UserException;
@@ -17,4 +17,8 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 @SpringBootTest
 public class UserControllerTest {
 
+    @Test
+    public void cadastrarUser_Success() throws UserException {
+       
+    }
 }
