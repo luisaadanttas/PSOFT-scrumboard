@@ -1,21 +1,19 @@
-package com.ufcg.psoft.scrumboard.controller;
+package com.ufcg.psoft.scrumboard;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+import com.ufcg.psoft.scrumboard.controller.ProjetoController;
 import com.ufcg.psoft.scrumboard.dto.*;
 import com.ufcg.psoft.scrumboard.exception.*;
-import com.ufcg.psoft.scrumboard.service.*;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 public class ProjetoTest {
 

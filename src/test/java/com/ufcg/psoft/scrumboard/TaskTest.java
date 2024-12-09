@@ -1,10 +1,9 @@
-package com.ufcg.psoft.scrumboard.controller;
+package com.ufcg.psoft.scrumboard;
 
+import com.ufcg.psoft.scrumboard.controller.UserController;
 import com.ufcg.psoft.scrumboard.dto.*;
 import com.ufcg.psoft.scrumboard.exception.*;
 import com.ufcg.psoft.scrumboard.service.*;
-import java.util.List;
-import com.ufcg.psoft.scrumboard.model.Task;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
