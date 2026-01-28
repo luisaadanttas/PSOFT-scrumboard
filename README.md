@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This application was developed as a final project for the "Software Project" class at UFCG.
+This application was developed as a final project for the "Software Design" course.
 
 ## Running the Application
 
